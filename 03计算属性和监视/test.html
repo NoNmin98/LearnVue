@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="demo">
+        姓：<input type="text" v-model="firstName"><br>
+        名：<input type="text" v-model="lastName"><br>
+        姓名1(单向)：<input type="text" v-model="f1"><br>
+        姓名2(单向)：<input type="text" v-model="f2"><br>
+        姓名3(双向)：<input type="text" v-model="f3"><br>
+    </div>
+
+
+    <script src="../js/vue.js"></script>
+    <script>
+        const vm=new Vue({
+            el:"#demo",
+            data:{
+                firstName:'A',
+                lastName:'B',
+            },
+            //增加一个计算属性，使用逗号隔开，这个时候f1变成了方法
+            computed:{
+                f1(){
+                    return this.firstName+' '+this.lastName
+                },
+
+                f3:{
+                    //回调函数，计算并返回当前属性的值
+                    get(){
+                        return this.firstName+' '+this.lastName
+                    },
+                    //回调函数，当属性值发生改变时回调，更新相关的属性数据
+                    set(value){
+                        const names=value.split(' ')
+                        this.firstName=names[0]
+                        this.lastName=names[1]
+                    }
+                }
+            },
+
+            //通过两个监视完成相同功能
+            watch:{//配置监视
+                firstName:function(value){
+                    this.f2=value+' '+this.lastName
+                }
+            }
+        })
+        //使用vm的自带方法，参数为：属性名回调函数
+        vm.$watch('lastName',function(value){
+            this.f2=this.firstName+' '+value
+        })
+    </script>
+</body>
+</html>

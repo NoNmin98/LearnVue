@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .active{
+            width: 100px;
+            height: 100px;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="msg">
+        <p>hello {{msg}}</p>
+        <div class="static"
+             v-bind:class="{active:isActive}">
+            hello vue
+        </div>
+    </div>
+
+    <script>
+        const vm=new Vue({
+            el:'#app',
+            data:{
+                msg:"hello",
+                isActive:true,
+                hasError:false
+            }
+        })
+    </script>
+</body>
+</html>

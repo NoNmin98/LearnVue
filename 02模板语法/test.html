@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <div id="app">
+        <h2>1</h2>
+            <p>{{msg}}</p>
+            <p>{{msg.toUpperCase()}}</p>
+        <h2>强制数据绑定</h2>
+        <img v-bind:src="imgUrl">
+        <img :src="imgUrl">
+        <h2>绑定事件监听</h2>
+        <button v-on:click="test">test1</button>
+        <button @click="test">test2</button>
+        <button @click="test3('hello')">test3</button>
+
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                msg:'hello',
+                imgUrl:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604288967072&di=79627a1f7efd61dc4b6e0ad4d8d5f20a&imgtype=0&src=http%3A%2F%2Fa0.att.hudong.com%2F30%2F29%2F01300000201438121627296084016.jpg'
+            },
+            methods:{
+                test(){
+                    alert('hello!')
+                },
+                test3(msg1){
+                    alert(msg1)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
