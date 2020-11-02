@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box1{
+            width: 100px;
+            height: 100px;
+            /* background-color: aquamarine; */
+        }
+        .aClass{
+            color: brown;
+        }
+        .bClass{
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="box1" :class="a">
+        
+        asdfasdgasdfasdf
+        <button @click="update">update</button>
+    </div>
+    
+    
+    <script src="../js/vue.js"></script>
+    <script>
+        const vm=new Vue({
+            el:'#box1',
+            data:{
+                a:'aClass',
+                b:'bClass', 
+            },
+            methods:{
+                update(){
+                    this.a='bClass';
+                    console.log(this.a);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
