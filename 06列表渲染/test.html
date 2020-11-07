@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box1">
+        <h2>test1</h2>
+        <ul>
+            <li v-for="(p, index) in persons" :key="index">
+                {{index}}=={{p.name}}==={{p.age}}
+                <button @click="deleteP(index)">del</button>
+            </li>
+        </ul>
+        <h2>test2</h2>
+    </div>
+    
+    <script src="../js/vue.js"></script>
+    <script>
+        new Vue({
+            el:'#box1',
+            data:{
+                persons:[
+                    {name:'Tom',age:18},
+                    {name:'Tom',age:19},
+                    {name:'Tom',age:14},
+                ] 
+            },
+            methods:{
+                deleteP(index){
+                    this.persons.splice(index,1)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

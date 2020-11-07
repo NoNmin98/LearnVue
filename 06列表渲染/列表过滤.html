@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表过滤</title>
+</head>
+<body>
+    <div id="box1">
+        <input type="text" v-model="searchName">
+        <ul>
+            <!-- 这里不能直接使用persons需要使用另一个过滤后的 -->
+            <li v-for="(p, index) in filterPersons" :key="index">
+                {{index}}=={{p.name}}=={{p.age}}
+            </li>
+        </ul>
+        <button @click="setOrderType(1)">年龄升序</button>
+        <button @click="setOrderType(2)">年龄降序</button>
+        <button @click="setOrderType(0)">原本顺序</button>
+    </div>
+
+
+    <script src="../js/vue.js"></script>
+    <script>
+        new Vue({
+            el:'#box1',
+            data:{
+                searchName:'',
+                orderType:0,
+                persons:[
+                    {name:'Tom',age:18},
+                    {name:'Li',age:19},
+                    {name:'Cat',age:14},
+                    {name:'Jack',age:55},
+                    {name:'Will',age:15},
+                    {name:'Jerry',age:76},
+
+                ] 
+            },
+            methods:{
+                setOrderType(orderType){
+                    this.orderType = orderType
+                }
+            },
+            //filter是通过了persons和搜索内容计算确定的
+            computed: {
+                filterPersons(){
+                    //获取相关数据,解构赋值？
+                    const{searchName,persons,orderType}=this
+                    let fPersons;
+                    //过滤，要先过滤再排序，使用匹配子串的方式
+                    fPersons=persons.filter(p=>p.name.indexOf(searchName)!==-1)
+                    //設置排序方法
+                    if(orderType!==0){
+                        fPersons.sort(function(p1,p2){
+                            if(orderType===2){
+                                //如果返回分数就翻转，本例降序
+                                return p2.age-p1.age;
+                            }
+                            else{
+                                return p1.age-p2.age
+                            }
+                        })
+                        //两种写法都可以
+                        // if(orderType===1){
+                        //     fPersons.sort((p1,p2)=>{return p2.age-p1.age})
+                        // }
+                        // if(orderType===2){
+                        //     fPersons.sort((p1,p2)=>{return p1.age-p2.age})
+                        // }
+                    }
+
+                    return fPersons
+                }
+
+            },
+        })
+    </script>
+</body>
+</html>
